@@ -117,7 +117,8 @@ class GoogleOAuthenticator(OAuthenticator, GoogleOAuth2Mixin):
             else:
                 username = username.split('@')[0]
 
-        return username
+        # replace . with - for kubernetes pod name compatibility
+        return username.replace('.','-')
 
 class LocalGoogleOAuthenticator(LocalAuthenticator, GoogleOAuthenticator):
     """A version that mixes in local system user creation"""
